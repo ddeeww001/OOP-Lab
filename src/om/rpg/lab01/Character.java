@@ -5,35 +5,33 @@ public class Character {
     private int level;
     private int maxHealthPoint;
     private int healthPoint;
-    private String charaterClass;
+    private String characterClass;
     private Weapon weapon;
     private int damage;
+    private int defense;
 
 
-
-    public Character(
-            String name,
-            int level,
-            int maxHealthPoint,
-            Weapon weapon,
-            String characterClass){
-        this.name = name;
-        this.level = level;
-        this.maxHealthPoint=maxHealthPoint;
-        this.healthPoint=maxHealthPoint;
-        this.weapon=weapon;
-        this.charaterClass=characterClass;
-        this.damage=(level*2)+weapon.getDamage();
-
+    public int getDefense() {
+        return defense;
     }
 
-    public void displayCharacterDetails(){
-        //toUpperCase = การบังคับให้ตัวอัหษรเป็นพิมใหญ่ทั้งหมด
-        System.out.println("--- "+name.toUpperCase()+" ---");
-        System.out.println("Class: "+charaterClass);
-        System.out.println("Level: "+ level);
-        System.out.println("Health Points: "+healthPoint+"/"+maxHealthPoint);
-        System.out.println("Weapon: "+weapon);
+    public void setDefense(int defense) {
+        this.defense = defense;
+    }
+
+
+
+
+    public Character(String name, int level, int maxHealthPoint, int baseDamage, int defense, Weapon weapon, String characterClass) {
+        this.name = name;
+        this.level = level;
+        this.maxHealthPoint = maxHealthPoint;
+        this.healthPoint = maxHealthPoint; // เริ่มต้นเลือดเต็ม
+        this.damage = baseDamage;
+        this.defense = defense;
+        this.weapon = weapon;
+        this.characterClass = characterClass;
+
     }
 
     public void levelUp(){
@@ -42,7 +40,7 @@ public class Character {
         maxHealthPoint += increase;
         healthPoint=maxHealthPoint;
         System.out.println("\n" + name + " leveled up to Level " + level + "!");
-        System.out.println("   Max health increased to " + maxHealthPoint + " (full heal applied)");
+        System.out.println("☑  Max health increased to " + maxHealthPoint + " (full heal applied)");
 
 
     }
@@ -53,11 +51,10 @@ public class Character {
         System.out.println("\n"+name+" takes "+damage+" damage! Remaining HP"+healthPoint+"/"+maxHealthPoint);
     }
 
-    public int attack(){
+    public void attack(){
         System.out.println("\nAttack Damage: " + damage +
                 " (Weapon Base: " + weapon.getDamage() +
                 " + Level Bonus: " + (level*2) + ")");
-        return damage;
     }
 
     public void heal(int heal){
@@ -70,7 +67,16 @@ public class Character {
 
 
 
-
+    public void displayCharacterDetails(){
+        //toUpperCase = การบังคับให้ตัวอัหษรเป็นพิมใหญ่ทั้งหมด
+        System.out.println("--- "+name.toUpperCase()+" ---");
+        System.out.println("Class: "+ characterClass);
+        System.out.println("Level: "+ level);
+        System.out.println("Health Points: "+healthPoint+"/"+maxHealthPoint);
+        System.out.println("Weapon: "+weapon);
+        System.out.println("Damage: " + (damage + weapon.getDamage()) + "\nDefense: " + defense);
+        System.out.println("Weapon: " + weapon);
+    }
 
 
     public String getName() {
@@ -105,12 +111,12 @@ public class Character {
         this.weapon = weapon;
     }
 
-    public String getCharaterClass() {
-        return charaterClass;
+    public String getCharacterClass() {
+        return characterClass;
     }
 
-    public void setCharaterClass(String charaterClass) {
-        this.charaterClass = charaterClass;
+    public void setCharacterClass(String characterClass) {
+        this.characterClass = characterClass;
     }
 
     public int getDamage() {
@@ -133,3 +139,4 @@ public class Character {
 
 
 }
+
