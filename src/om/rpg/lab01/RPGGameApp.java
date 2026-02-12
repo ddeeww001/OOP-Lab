@@ -1,6 +1,6 @@
 package om.rpg.lab01;
 
-public class RPGGameApp {
+public class RPGGameApp {/*
     public static void main(String[] args) {
 
         System.out.println("\n" + "=".repeat(70));
@@ -45,5 +45,5 @@ public class RPGGameApp {
         healer.heal();
         System.out.println("\n--- Healer heals the Warrior ---");
         healer.healAlly(warrior);
-    }
+    }*/
 }
