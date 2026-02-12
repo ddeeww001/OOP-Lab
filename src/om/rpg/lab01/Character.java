@@ -27,15 +27,6 @@ public class Character {
 
     }
 
-    public void displayCharacterDetails(){
-        //toUpperCase = การบังคับให้ตัวอัหษรเป็นพิมใหญ่ทั้งหมด
-        System.out.println("--- "+name.toUpperCase()+" ---");
-        System.out.println("Class: "+charaterClass);
-        System.out.println("Level: "+ level);
-        System.out.println("Health Points: "+healthPoint+"/"+maxHealthPoint);
-        System.out.println("Weapon: "+weapon);
-    }
-
     public void levelUp(){
         level++;
         int increase = 10;
@@ -70,7 +61,14 @@ public class Character {
 
 
 
-
+    public void displayCharacterDetails(){
+        //toUpperCase = การบังคับให้ตัวอัหษรเป็นพิมใหญ่ทั้งหมด
+        System.out.println("--- "+name.toUpperCase()+" ---");
+        System.out.println("Class: "+charaterClass);
+        System.out.println("Level: "+ level);
+        System.out.println("Health Points: "+healthPoint+"/"+maxHealthPoint);
+        System.out.println("Weapon: "+weapon);
+    }
 
 
     public String getName() {

@@ -13,7 +13,7 @@ public class Healer extends Character {
     }
 
     public Healer(String name, int level, int maxHealthPoint, Weapon weapon, int healingPoint) {
-        super(name, level, maxHealthPoint, weapon, "Healer");
+        super(name, level, maxHealthPoint, weapon, "Healer");//เรียก constructor จาก class แม่(character)
         this.healingPoint = healingPoint;
     }
 
@@ -37,7 +37,7 @@ public class Healer extends Character {
         System.out.println("  Class: " + this.getCharaterClass());
         System.out.println("  Level: " + this.getLevel());
         System.out.println("  Health Points: " + this.getHealthPoint() + "/" + this.getMaxHealthPoint());
-        System.out.println("    Weapon: " + this.getWeapon().toString());
+        System.out.println("  Weapon: " + this.getWeapon().toString());
         System.out.println("  Healing Power: " + getHealingPoint());
     }
 
