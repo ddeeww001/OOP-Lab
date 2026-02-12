@@ -42,6 +42,7 @@ public class Book {
             System.out.println("Return Due Date: " + this.returnDate);
         } else {
             // แก้ไข: ลบบรรทัดที่ทำให้สถานะผิดเพี้ยนออก (this.status = "Available")
+            System.out.println("Member " + member.getMemberName() + " has reached the borrow limit (3).");
             System.out.println("Error: Book '" + title + "' is already borrowed and cannot be checked out again.");
         }
     }

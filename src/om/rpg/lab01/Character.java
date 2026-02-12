@@ -34,8 +34,9 @@ public class Character {
         this.healthPoint=maxHealthPoint;
         this.weapon=weapon;
         this.charaterClass=characterClass;
-        this.damage=(level*2)+weapon.getDamage();
         this.defense=defense;
+        this.damage=(level*2)+weapon.getDamage();
+
     }
 
     public void levelUp(){
@@ -44,7 +45,7 @@ public class Character {
         maxHealthPoint += increase;
         healthPoint=maxHealthPoint;
         System.out.println("\n" + name + " leveled up to Level " + level + "!");
-        System.out.println("   Max health increased to " + maxHealthPoint + " (full heal applied)");
+        System.out.println("☑  Max health increased to " + maxHealthPoint + " (full heal applied)");
 
 
     }
@@ -78,8 +79,8 @@ public class Character {
         System.out.println("Level: "+ level);
         System.out.println("Health Points: "+healthPoint+"/"+maxHealthPoint);
         System.out.println("Weapon: "+weapon);
-        System.out.println("Damage"+damage);
-        System.out.println("Defense"+defense);
+        System.out.println("Damage: " + (damage + weapon.getDamage()) + "\nDefense: " + defense);
+        System.out.println("Weapon: " + weapon);
     }
 
 
