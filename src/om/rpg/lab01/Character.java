@@ -4,7 +4,7 @@ public class Character {
     private String name;
     private int level;
     private int maxHealthPoint;
-    private int healingPoint;
+    private int healthPoint;
     private String characterClass;
     private Weapon weapon;
     private int damage;
@@ -26,7 +26,7 @@ public class Character {
         this.name = name;
         this.level = level;
         this.maxHealthPoint = maxHealthPoint;
-        this.healingPoint = maxHealthPoint; // เริ่มต้นเลือดเต็ม
+        this.healthPoint = maxHealthPoint; // เริ่มต้นเลือดเต็ม
         this.damage = damage;
         this.defense = defense;
         this.weapon = weapon;
@@ -38,30 +38,45 @@ public class Character {
         level++;
         int increase = 10;
         maxHealthPoint += increase;
-        healingPoint =maxHealthPoint;
+        healthPoint =maxHealthPoint;
         System.out.println("\n" + name + " leveled up to Level " + level + "!");
-        System.out.println("☑  Max health increased to " + maxHealthPoint + " (full heal applied)");
+        System.out.println(" Max health increased to " + maxHealthPoint + " (full heal applied)");
 
 
     }
 
     public void takeDamage(int damage){
-        healingPoint -= damage;
-        if(healingPoint <0){
-            healingPoint =0;}
-        System.out.println("\n"+name+" takes "+damage+" damage! Remaining HP"+ healingPoint +"/"+maxHealthPoint);
-    }
+        int actualDamage = damage - this.defense;
+        if (actualDamage < 0) actualDamage = 0;
+        healthPoint -= damage;
+        if(healthPoint <0){
+            healthPoint =0;}
+        System.out.println("\n"+name+" takes "+damage+" damage! Remaining HP"+ healthPoint +"/"+maxHealthPoint);
 
-    public void attack(Character characterClass){
-        System.out.println("\nAttack Damage: " + damage +
-                " (Weapon Base: " + weapon.getDamage() +
-                " + Level Bonus: " + (level*2) + ")");
+          }
+
+    public void attack(Character target){
+        int totalDamage = this.damage + this.weapon.getDamage();
+        int actualDamage = damage - this.defense+totalDamage;
+        if (actualDamage < 0) {
+            actualDamage = 0;
+        } else {
+            target.healthPoint -= actualDamage;
+        }
+        healthPoint -= damage;
+        System.out.println(this.name + "( " + this.characterClass + ") attacks " + target.getName() + " with "+weapon.getName()+"!");
+        System.out.println("Raw Attack Damage:"+this.damage);
+        System.out.println(this.name+"'s Defense: "+target.defense+" reduces damage by "+target.defense+")");
+        System.out.println("Actual Damage Taken: " + totalDamage);
+        System.out.println(target.name + "'s HP: " + target.healthPoint + "/" + target.maxHealthPoint);
+
+
     }
 
     public void heal(int heal){
-        this.healingPoint += heal;
-        if(this.healingPoint >this.maxHealthPoint){
-            this.healingPoint =this.maxHealthPoint;
+        this.healthPoint += heal;
+        if(this.healthPoint >this.maxHealthPoint){
+            this.healthPoint =this.maxHealthPoint;
         }
 
     }
@@ -74,7 +89,7 @@ public class Character {
        // System.out.println(name.toUpperCase());
         System.out.println("Class: "+ characterClass);
         System.out.println("Level: "+ level);
-        System.out.println("Health Points: "+ healingPoint +"/"+maxHealthPoint);
+        System.out.println("Health Points: "+ healthPoint +"/"+maxHealthPoint);
         System.out.println("Damage: " + damage );//"\nDefense: " + defense);
         System.out.println("Defense: "+defense);
         System.out.println("Weapon: " + weapon.toString());
@@ -98,11 +113,11 @@ public class Character {
     }
 
     public int getHealthPoint() {
-        return healingPoint;
+        return healthPoint;
     }
 
     public void setHealthPoint(int healingPoint) {
-        this.healingPoint = healingPoint;
+        this.healthPoint = healingPoint;
     }
 
     public Weapon getWeapon() {
