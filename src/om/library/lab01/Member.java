@@ -5,6 +5,8 @@ import java.time.LocalDate;
 public class Member {
     private String memberId;
     private String memberName;
+    private int borrowedCount = 0;
+    private final int MAX_LIMIT = 3;
 /* 
     private String title;
     private String author;
@@ -16,6 +18,12 @@ public class Member {
     public Member(String memberId,String memberName){
         this.memberId=memberId;
         this.memberName=memberName;
+    }
+    public void incrementBorrowed() {
+        borrowedCount++;
+    }
+    public boolean canBorrow() {
+        return borrowedCount < MAX_LIMIT;
     }
 
     /* 
