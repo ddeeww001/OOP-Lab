@@ -17,7 +17,7 @@ public class Book {
         this.price = price;
         this.status = status; // แก้ไข: ใช้ค่า status ที่รับเข้ามาแทนการกำหนดตายตัว
     }
-
+/* 
     // Method แสดงรายละเอียด (แก้ไขการเว้นวรรคและเพิ่มหน่วย Baht)
     public void displayDetails() {
         System.out.println("- Title: " + title);
@@ -32,7 +32,7 @@ public class Book {
             System.out.println("- Return Due Date: " + returnDate);
         }
     }
-
+*/
     // Method ยืมหนังสือ (แก้ไข Logic การคืนค่า และข้อความให้มี ' ')
     public void checkOut(Member member) {
         if ("Available".equalsIgnoreCase(this.status)) {
