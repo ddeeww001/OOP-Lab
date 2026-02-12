@@ -8,7 +8,20 @@ public class Character {
     private String charaterClass;
     private Weapon weapon;
     private int damage;
+    private int defense;
 
+    public int getDefense() {
+        return defense;
+    }
+
+    public void setDefense(int defense) {
+        this.defense = defense;
+    }
+
+    public  boolean isAlive(){
+        //
+
+    }
 
 
     public Character(
@@ -16,6 +29,7 @@ public class Character {
             int level,
             int maxHealthPoint,
             Weapon weapon,
+            int defense,
             String characterClass){
         this.name = name;
         this.level = level;
@@ -24,7 +38,7 @@ public class Character {
         this.weapon=weapon;
         this.charaterClass=characterClass;
         this.damage=(level*2)+weapon.getDamage();
-
+        this.defense=defense;
     }
 
     public void levelUp(){
@@ -44,11 +58,10 @@ public class Character {
         System.out.println("\n"+name+" takes "+damage+" damage! Remaining HP"+healthPoint+"/"+maxHealthPoint);
     }
 
-    public int attack(){
+    public void attack(){
         System.out.println("\nAttack Damage: " + damage +
                 " (Weapon Base: " + weapon.getDamage() +
                 " + Level Bonus: " + (level*2) + ")");
-        return damage;
     }
 
     public void heal(int heal){
@@ -68,6 +81,8 @@ public class Character {
         System.out.println("Level: "+ level);
         System.out.println("Health Points: "+healthPoint+"/"+maxHealthPoint);
         System.out.println("Weapon: "+weapon);
+        System.out.println("Damage"+damage);
+        System.out.println("Defense"+defense);
     }
 
 
