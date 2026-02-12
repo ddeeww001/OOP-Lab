@@ -8,7 +8,7 @@ public class Book {
     private double price;
     private String status;
     private LocalDate returnDate;
-    private Member borrower;
+
     // Constructor
     public Book(String title, String author, String isbn, double price, String status) {
         this.title = title;
@@ -34,11 +34,11 @@ public class Book {
     }
 
     // Method ยืมหนังสือ (แก้ไข Logic การคืนค่า และข้อความให้มี ' ')
-    public void checkOut() {
+    public void checkOut(Member member) {
         if ("Available".equalsIgnoreCase(this.status)) {
             this.status = "Borrowed";
             this.returnDate = LocalDate.now().plusDays(14); // กำหนดคืนใน 14 วัน
-            System.out.println("Book ['" + title + "'] has been checked out successfully.["+borrower.getMemberName()+"]");
+            System.out.println("Book ['" + title + "'] has been checked out successfully.["+member.getMemberName()+"]");
             System.out.println("Return Due Date: " + this.returnDate);
         } else {
             // แก้ไข: ลบบรรทัดที่ทำให้สถานะผิดเพี้ยนออก (this.status = "Available")
