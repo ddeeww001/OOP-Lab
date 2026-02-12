@@ -4,9 +4,10 @@ public class Healer extends Character {
     private int healingPower;
     private int healthPoint;
     private int maxHealthPoint;
-
+    private  boolean checkpoint = true;
     public int getHealingPower() {
-        return healingPower + (getLevel()*2);
+        healingPower += getLevel();
+        return healingPower;
     }
 
     public void setHealingPower(int healingPower) {
@@ -38,9 +39,15 @@ public class Healer extends Character {
     public void healAlly(Character ally) {
         int amount = healingPower + (getLevel() * 3);
         ally.heal(getHealingPower());
+        if(checkpoint){
+            System.out.println(this.getName() + " (Healer) casts healing spell on " + ally.getName() + "!");
+            System.out.println("   Healing Amount: " + amount+ " (Base: "+healingPower+"  Level Bonus: "+(getLevel()*3) );
+            System.out.println("   Restored "+ amount + " HP to " + ally.getName() + "! Their HP: " + ally.getHealthPoint());
+        }
+
         System.out.println(this.getName() + " (Healer) casts healing spell on " + ally.getName() + "!");
-        System.out.println("   Healing Amount: " + getHealingPower());
-        System.out.println("   Restored "+ getHealingPower() + " HP to " + ally.getName() + "! Their HP: " + ally.getHealthPoint());
+        System.out.println("   Healing Amount: " + amount);
+        System.out.println("   Restored "+ amount + " HP to " + ally.getName() + "! Their HP: " + ally.getHealthPoint());
     }
 
     @Override
@@ -48,10 +55,11 @@ public class Healer extends Character {
         System.out.println("\n--- " + this.getName().toUpperCase() + " ---");
         System.out.println(" Class: " + this.getCharacterClass());
         System.out.println(" Level: " + this.getLevel());
-        System.out.println(" Health Points: " + this.getHealthPoint() + "/" + this.getMaxHealthPoint());
+        System.out.println(" Health Points: " + healthPoint+ "/" + maxHealthPoint);
         System.out.println(" Damage: "+getDamage());
         System.out.println(" Defense: "+getDefense());
         System.out.println(" Weapon: " + this.getWeapon().toString());
+        System.out.println(" Healing Power: "+healingPower);
     }
 
     @Override
