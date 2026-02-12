@@ -5,18 +5,20 @@ import java.time.LocalDate;
 public class Member {
     private String memberId;
     private String memberName;
-
+/* 
     private String title;
     private String author;
     private String isbn;
     private double price;
     private String status;
-    private LocalDate returnDate;
+    private LocalDate returnDate;*/
 
     public Member(String memberId,String memberName){
         this.memberId=memberId;
         this.memberName=memberName;
     }
+
+    /* 
 
     public void displayDetails() {
         System.out.println("- Title: " + title);
@@ -31,7 +33,7 @@ public class Member {
             System.out.println("- Return Due Date: " + returnDate);
         }
     }
-
+ */
     public String getMemberId() {
         return memberId;
     }

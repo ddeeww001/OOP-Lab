@@ -18,10 +18,7 @@ public class Character {
         this.defense = defense;
     }
 
-    public  boolean isAlive(){
-        //
-
-    }
+  
 
 
     public Character(
