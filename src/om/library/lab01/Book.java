@@ -19,44 +19,24 @@ public class Book {
     }
 
     // Method แสดงรายละเอียด (แก้ไขการเว้นวรรคและเพิ่มหน่วย Baht)
-    public void displayDetails() {/*
-        System.out.println("- Title: " + title);
-        System.out.println("- Author: " + author);
-        System.out.println("- ISBN: " + isbn);
-        System.out.println("- Price: " + price + " Baht"); // เพิ่มหน่วย Baht
-        System.out.println("- Status: " + status);
-
-        if ((returnDate == null) || (this.status.equalsIgnoreCase("Available"))) {
-            System.out.println("- Return Due Date: N/A (Book is available)");
-        } else {
-            System.out.println("- Return Due Date: " + returnDate);
-        }*/
-
-            System.out.println("Book [Title='" + title + "', Status='" + status + "']");
-
-
+    public void displayDetails() {
+        System.out.println("Book [Title='" + title + "', Status='" + status + "']");
     }
 
     // Method ยืมหนังสือ (แก้ไข Logic การคืนค่า และข้อความให้มี ' ')
     public void checkOut(Member member) {
-        // 1. เช็คสถานะหนังสือก่อน
-        if (!"Available".equalsIgnoreCase(this.status)) {
-            System.out.println("Error: Book '" + title + "' is already borrowed.");
-            return;
-        }
 
-        // 2. เช็คสิทธิ์สมาชิก (Interaction ระหว่าง Object)
         if (member.canBorrow()) {
             this.status = "Borrowed";
             this.returnDate = LocalDate.now().plusDays(14);
-            member.incrementBorrowed(); // สั่งให้ Member เพิ่มยอดการยืม
-
+            member.incrementBorrowed();
             System.out.println("Book '" + title + "' has been checked out successfully.");
             System.out.println("Book " + title + " has been borrowed by " + member.getMemberName() + ".");
             System.out.println("Return Due Date: " + this.returnDate);
-        } else {
+        }if (!"Available".equalsIgnoreCase(this.status)) {
             System.out.println("Member " + member.getMemberName() + " has reached the borrow limit (3).");
             System.out.println("Borrow request denied for member " + member.getMemberName() + ".");
+
         }
     }
 
