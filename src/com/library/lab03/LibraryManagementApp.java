@@ -52,7 +52,7 @@ public class LibraryManagementApp {
 // Display items after checkout using polymorphism
         System.out.println("\n--- ITEMS STATUS AFTER CHECKOUT ---");
         for (LibraryItem item : allItems) {
-            item.displayDetails();
+            item.printSummary();
         }
 
 // Demonstrate returnItem() method
@@ -67,7 +67,13 @@ public class LibraryManagementApp {
         allItems.get(1).checkOut(member1); // Should be denied (limit reached)
 // Final display using polymorphism
         System.out.println("\n--- FINAL LIBRARY STATUS (Polymorphism Demo) ---");
-
+        /*
+        for (PhysicalBook item : physicalBooks) {
+            item.displayDetails();
+        }
+        for (EBook item : eBooks) {
+            item.displayDetails();
+        }*/
         for (LibraryItem item : allItems) {
             item.displayDetails();
         }

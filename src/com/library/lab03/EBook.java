@@ -10,6 +10,22 @@ public class EBook extends LibraryItem {
         this.fileSize = fileSize;
     }
 
+    public String getDownloadUrl() {
+        return downloadUrl;
+    }
+
+    public void setDownloadUrl(String downloadUrl) {
+        this.downloadUrl = downloadUrl;
+    }
+
+    public double getFileSize() {
+        return fileSize;
+    }
+
+    public void setFileSize(double fileSize) {
+        this.fileSize = fileSize;
+    }
+
     @Override
     public void displayDetails() {
         System.out.println("E-BOOK");
@@ -25,5 +41,10 @@ public class EBook extends LibraryItem {
     @Override
     public double calculateLateFee(int days) {
         return 0.0; // No late fees, auto-expires
+    }
+
+    @Override
+    public void printSummary() {
+
     }
 }

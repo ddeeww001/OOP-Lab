@@ -24,7 +24,7 @@ public class PhysicalBook extends LibraryItem {
     public double calculateLateFee(int days) {
         return days * 5.0; // 5 Baht per day
     }
-
+    @Override
     public void printSummary() {
         System.out.println("PhysicalBook[Title='" + title + "', Location='" + shelfLocation + "', Status='" + (isAvailable ? "Available" : "Borrowed") + "']");
     }

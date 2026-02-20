@@ -19,9 +19,11 @@ public abstract class LibraryItem {
         this.isAvailable = true;
     }
 
+
     // Abstract methods to enforce polymorphism
     public abstract void displayDetails();
     public abstract double calculateLateFee(int days);
+    public abstract void printSummary();
 
     public void checkOut(Member member) {
         if (!isAvailable) {
