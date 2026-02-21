@@ -18,8 +18,14 @@ public class Archer extends Character {
 
     @Override
     public void displayCharacterDetails() {
-        super.displayCharacterDetails();
+        System.out.println("--- " + name.toUpperCase() + " (" + type.toUpperCase() + ") ---");
+        System.out.println("Status: " + (hp > 0 ? "Active" : "Defeated"));
+        System.out.println("Level: " + level);
+        System.out.println("Health Points: " + hp + "/" + maxHp);
+        System.out.println("Damage: " + damage);
+        System.out.println("Defense: " + defense);
         System.out.println("Accuracy: " + accuracy + "%");
         System.out.println("Range Advantage: Yes (30% bonus)");
-    }
+        System.out.println("Weapon: " + weapon.getName() + " (Type: " + weapon.getType() + ", Damage: " + weapon.getDamage() + ", Ability: " + weapon.getAbility() + ")");
+         }
 }
