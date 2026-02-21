@@ -28,5 +28,8 @@ public class Warrior extends Character {
     public void displayCharacterDetails() {
         super.displayCharacterDetails();
         System.out.println("Armor Value: " + armorValue);
+        if (weapon != null) {
+            System.out.println("Weapon: " + weapon.getName() + " (Type: " + weapon.getType() + ", Damage: " + weapon.getDamage() + ", Ability: " + weapon.getAbility() + ")");
+        }
     }
 }

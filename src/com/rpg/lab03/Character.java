@@ -60,9 +60,7 @@ public class Character {
         System.out.println("Health Points: " + hp + "/" + maxHp);
         System.out.println("Damage: " + damage);
         System.out.println("Defense: " + defense);
-        if (weapon != null) {
-            System.out.println("Weapon: " + weapon.getName() + " (Type: " + weapon.getType() + ", Damage: " + weapon.getDamage() + ", Ability: " + weapon.getAbility() + ")");
-        }
+
     }
 
 
