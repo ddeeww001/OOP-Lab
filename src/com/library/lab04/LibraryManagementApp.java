@@ -41,7 +41,7 @@ public class LibraryManagementApp {
 // Display items after checkout using polymorphism
         System.out.println("\n--- ITEMS STATUS AFTER CHECKOUT ---");
         for (LibraryItem item : items) {
-            item.printSummary();
+            item.displayDetails();
         }
 // Demonstrate returnItem() method
         System.out.println("\n--- TESTING RETURN FUNCTIONALITY ---");
@@ -71,13 +71,12 @@ public class LibraryManagementApp {
         System.out.println("=".repeat(60));
 // Demonstrate Digital Content Interface
         System.out.println("\n--- DIGITAL CONTENT INTERFACE ---");
-        System.out.println("Processing Digital Content for EBooks (DigitalContent
-        interface):");
+        System.out.println("Processing Digital Content for EBooks (DigitalContent interface):");
         System.out.println("Note: Only EBooks implement DigitalContent, PhysicalBooks do NOT.\n");
 // This works because EBook implements DigitalContent
         for (LibraryItem item : items) {
             if (item instanceof DigitalContent) {
-                DigitalContent digitalBook = (DigitalContent) item;
+                DigitalContent digitalBook = (DigitalContent) item;//😵😵😵
                 System.out.println("Processing EBook: " + item.getTitle());
                 processDigitalAccess(digitalBook);
             }
@@ -110,7 +109,7 @@ public class LibraryManagementApp {
     }
 
 
-
+/*
     //library Movie 😺😺😺
     // Create a list for DigitalContent items (can contain both EBooks and Movies!)
     List<DigitalContent> digitalContent = new ArrayList<>();
@@ -123,8 +122,7 @@ public class LibraryManagementApp {
 digitalContent.add(movie1);
 digitalContent.add(movie2);
 // Also add ebooks to the digital content list
-digitalContent.add(new EBook("Effective Java", "Joshua Bloch", "978-0134685991",
-                                     "https://library.ebooks.com/effective-java.pdf", 5.2));
+digitalContent.add(new EBook("Effective Java", "Joshua Bloch", "978-0134685991","https://library.ebooks.com/effective-java.pdf", 5.2));
 // Demonstrate the Universal Streaming Player
 System.out.println("\n" + "=".repeat(60));
 System.out.println(" UNIVERSAL STREAMING PLAYER (Polymorphism via Interfaces)");
@@ -142,5 +140,5 @@ for (DigitalContent content : digitalContent) {
         }
         System.out.println("---");
         launchStreamingPlayer(content);
-    }
+    }*/
 }

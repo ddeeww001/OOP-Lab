@@ -2,8 +2,7 @@ package com.rpg.lab04;
 import java.util.ArrayList;
 import java.util.List;
 public class RPGGameApp {
-    public static void main(String[] args) {
-        System.out.println("\n" + "=".repeat(70));
+    public static void main(String[] args) {/*        System.out.println("\n" + "=".repeat(70));
         System.out.println(" SCENARIO 4: INTERFACES - DESTRUCTIBLE & CONSUMABLE");
         System.out.println("=".repeat(70));
 // ==================== CREATE WEAPONS ====================
@@ -88,4 +87,6 @@ public class RPGGameApp {
         treasureBox.breakOpen();
         System.out.println("\n--- Attempting to break the Supply Crate (still intact) ---");
         crate.breakOpen();
+    }*/
     }
+}

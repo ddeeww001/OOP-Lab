@@ -9,7 +9,7 @@ public class PhysicalBook extends LibraryItem implements Taxable {
     }
 
     @Override
-    public void displayDetails() {
+    public void printSummary() {
         System.out.println("PHYSICAL BOOK");
         System.out.println("- Title: " + title);
         System.out.println("- Author: " + author);
@@ -25,13 +25,13 @@ public class PhysicalBook extends LibraryItem implements Taxable {
         return days * 5.0; // 5 Baht per day
     }
     @Override
-    public void printSummary() {
+    public void displayDetails() {
         System.out.println("PhysicalBook[Title='" + title + "', Location='" + shelfLocation + "', Status='" + (isAvailable ? "Available" : "Borrowed") + "']");
     }
 
     @Override
-    public void calculateTax() {
+    public double calculateTax() {
         double digitalTax = 0.07;
-        return getPrice() * digitalTax ;
+        return this.price * digitalTax ;
     }
 }

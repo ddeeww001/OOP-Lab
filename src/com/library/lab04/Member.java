@@ -14,7 +14,7 @@ public class Member {
     public String getName() { return name; }
     public int getBorrowedCount() { return borrowedCount; }
     public void borrowItem() { this.borrowedCount++; }
-    public void returnItem() { this.borrowedCount--; }
+    public void returnItem() { if(borrowedCount > 0){this.borrowedCount--;}}
 
     public String getMemberId() {
         return memberId;

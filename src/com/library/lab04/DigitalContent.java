@@ -1,6 +1,6 @@
 package com.library.lab04;
 
 public interface DigitalContent {
-    void streamOnline();
-    void download();
+    void streamOnline();//😵😵
+    void download();//😵‍💫😵‍💫
 }

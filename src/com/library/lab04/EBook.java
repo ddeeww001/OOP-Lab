@@ -5,7 +5,7 @@ public class EBook extends LibraryItem implements DigitalContent, Taxable {
     private double fileSize;
 
     public EBook(String title, String author, String isbn, String downloadUrl, double fileSize) {
-        super(title, author, isbn, 0.0); // E-books might not have a physical replacement price
+        super(title, author, isbn, 99.0); // E-books might not have a physical replacement price
         this.downloadUrl = downloadUrl;
         this.fileSize = fileSize;
     }
@@ -28,15 +28,8 @@ public class EBook extends LibraryItem implements DigitalContent, Taxable {
 
     @Override
     public void displayDetails() {
-        System.out.println("E-BOOK");
-        System.out.println("- Title: " + title);
-        System.out.println("- Author: " + author);
-        System.out.println("- ISBN: " + isbn);
-        System.out.println("- Download URL: " + downloadUrl);
-        System.out.println("- File Size: " + fileSize + " MB");
-        System.out.println("- Status: " + (isAvailable ? "Available" : "Borrowed"));
-        System.out.println("- Return Due Date: " + (isAvailable ? "N/A (E-book is available)" : dueDate));
-    }
+        System.out.println("EBook[Title='" + title + "', Size='" + fileSize + "', Status='" + (isAvailable ? "Available" : "Borrowed") + "']");
+           }
 
     @Override
     public double calculateLateFee(int days) {
@@ -45,17 +38,27 @@ public class EBook extends LibraryItem implements DigitalContent, Taxable {
 
     @Override
     public void printSummary() {
-
+        System.out.println("- Title: " + title);
+        System.out.println("- ISBN: " + isbn);
+        System.out.println("- Status: " + (isAvailable ? "Available" : "Borrowed"));
+        System.out.println("- Return Due Date: " + (isAvailable ? "N/A (E-book is available)" : dueDate));
     }
 
     @Override
     public void streamOnline() {
 //hw
+        System.out.println("Streaming '" + title + "' from URL: " + downloadUrl);
+        System.out.println("Starting online stream... connected!");
+        System.out.println("You can now read the book online without downloading.");
     }
 
     @Override
     public void download() {
 //hw
+        System.out.println("Downloading '" + title + "' from URL: " + downloadUrl);
+        System.out.printf("Downloading file... (%.2f MB)\n", fileSize);
+        System.out.println("Download complete! File saved to your device.");
+        System.out.println("You can now read the book offline.");
     }
 
     @Override
