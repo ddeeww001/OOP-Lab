@@ -92,6 +92,44 @@ public class LibraryManagementApp {
             System.out.printf(" %s: Price = %.2f Baht, Tax = %.2f Baht, Total = %.2f Baht\n",
                     item.getTitle(), item.getPrice(), tax, item.getPrice() + tax);
         }
+        // Create a list for DigitalContent items (can contain both EBooks and Movies!)
+        List<DigitalContent> digitalContent = new ArrayList<>();
+// Add movies (NOTE: Movies do NOT inherit from LibraryItem!)
+        LibraryMovie movie1 = new LibraryMovie("The Matrix", "Lana Wachowski",
+                "https://streaming.library.com/matrix.mp4", 136, 1999, "Sci-Fi", 199.0);
+        LibraryMovie movie2 = new LibraryMovie("Inception", "Christopher Nolan",
+                "https://streaming.library.com/inception.mp4", 148, 2010, "Sci-Fi/Thriller", 249.0);
+// Add them to the digital content list
+        digitalContent.add(movie1);
+        digitalContent.add(movie2);
+// Also add ebooks to the digital content list
+        digitalContent.add(new EBook("Effective Java", "Joshua Bloch", "978-0134685991",
+                "https://library.ebooks.com/effective-java.pdf", 5.2));
+// Demonstrate the Universal Streaming Player
+        System.out.println("\n" + "=".repeat(60));
+        System.out.println(" UNIVERSAL STREAMING PLAYER (Polymorphism via Interfaces)");
+        System.out.println("=".repeat(60));
+        System.out.println("\nThis demonstrates interface-based polymorphism:");
+        System.out.println("A single player can handle BOTH movies and e-books!\n");
+// Play through each digital content without caring about their actual type
+        for (DigitalContent content : digitalContent) {
+            if (content instanceof LibraryMovie) {
+                LibraryMovie movie = (LibraryMovie) content;
+                System.out.println(" STREAMING PLAYER - Playing Movie: " + movie.getTitle());
+            } else if (content instanceof EBook) {
+                EBook book = (EBook) content;
+                System.out.println(" STREAMING PLAYER - Reading E-Book: " + book.getTitle());
+            }
+            System.out.println("---");
+            launchStreamingPlayer(content);
+        }
+    }
+    public static void launchStreamingPlayer(DigitalContent content) {
+        System.out.println("Connecting to streaming service...");
+        System.out.println("Loading content...\n");
+        content.streamOnline();
+        System.out.println("User requests offline copy:");
+        content.download();
     }
     /**
      * Universal Streaming Player - Works with ANY DigitalContent object!
@@ -109,36 +147,5 @@ public class LibraryManagementApp {
     }
 
 
-/*
-    //library Movie 😺😺😺
-    // Create a list for DigitalContent items (can contain both EBooks and Movies!)
-    List<DigitalContent> digitalContent = new ArrayList<>();
-    // Add movies (NOTE: Movies do NOT inherit from LibraryItem!)
-    LibraryMovie movie1 = new LibraryMovie("The Matrix", "Lana Wachowski",
-            "https://streaming.library.com/matrix.mp4", 136, 1999, "Sci-Fi", 199.0);
-    LibraryMovie movie2 = new LibraryMovie("Inception", "Christopher Nolan",
-            "https://streaming.library.com/inception.mp4", 148, 2010, "Sci-Fi/Thriller", 249.0);
-// Add them to the digital content list
-digitalContent.add(movie1);
-digitalContent.add(movie2);
-// Also add ebooks to the digital content list
-digitalContent.add(new EBook("Effective Java", "Joshua Bloch", "978-0134685991","https://library.ebooks.com/effective-java.pdf", 5.2));
-// Demonstrate the Universal Streaming Player
-System.out.println("\n" + "=".repeat(60));
-System.out.println(" UNIVERSAL STREAMING PLAYER (Polymorphism via Interfaces)");
-System.out.println("=".repeat(60));
-System.out.println("\nThis demonstrates interface-based polymorphism:");
-System.out.println("A single player can handle BOTH movies and e-books!\n");
-// Play through each digital content without caring about their actual type
-for (DigitalContent content : digitalContent) {
-        if (content instanceof LibraryMovie) {
-            LibraryMovie movie = (LibraryMovie) content;
-            System.out.println(" STREAMING PLAYER - Playing Movie: " + movie.getTitle());
-        } else if (content instanceof EBook) {
-            EBook book = (EBook) content;
-            System.out.println(" STREAMING PLAYER - Reading E-Book: " + book.getTitle());
-        }
-        System.out.println("---");
-        launchStreamingPlayer(content);
-    }*/
+
 }
