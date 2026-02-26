@@ -1,4 +1,4 @@
-package com.library.lab04;
+package com.library.lab05;
 
 // ไม่มีการ extends คลาสใดๆ แต่ implements DigitalContent
 public class LibraryMovie implements DigitalContent {
