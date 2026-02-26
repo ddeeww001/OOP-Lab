@@ -1,16 +1,16 @@
 package com.rpg.lab04;
 
 public class Character implements Destructible {
-    private String name;
-    private int level;
-    private int maxHp;
-    private int hp;
-    private int damage;
-    private int defense;
-    private Weapon weapon;
-    private String type;
+    protected String name;
+    protected int level;
+    protected int maxHp;
+    protected int hp;
+    protected int damage;
+    protected int defense;
+    protected Weapon weapon;
+    protected String type;
 
-    private boolean Alive = true;
+    protected boolean Alive = true;
 
     public void heal(int heal){
         this.hp += heal;
@@ -76,10 +76,6 @@ public class Character implements Destructible {
         System.out.println("Defense: " + defense);
 
     }
-
-
-
-
 
     public void setName(String name) {
         this.name = name;
@@ -150,7 +146,7 @@ public class Character implements Destructible {
 
     @Override
     public boolean isDestroyed() {
-        return !Alive ;
+        return this.hp <= 0 ;
     }
 
 }

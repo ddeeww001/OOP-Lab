@@ -1,6 +1,6 @@
 package com.rpg.lab04;
 
-public class Healer extends Character {
+public class Healer extends Character  {
     private int baseHealingPower;
 
     public Healer(String name, int level, int maxHp, int damage, int defense, Weapon weapon, int baseHealingPower) {

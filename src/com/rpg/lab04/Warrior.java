@@ -4,17 +4,36 @@ public class Warrior extends Character {
     private int armorValue;
 
     public Warrior(String name, int level, int maxHp, int damage, int defense, int armorValue, Weapon weapon) {
-        super(name, level, maxHp, damage, defense, weapon);
-        this.type = "Warrior";
+        super(name, level, maxHp, damage, defense, weapon, "Warrior");
         this.armorValue = armorValue;
     }
 
     @Override
     public void attack(Character target) {
-        int totalDamage = (int) ((this.damage + weapon.getDamage()) * 1.5); // 1.5x multiplier
-        System.out.println(this.name + " uses a heavy strike on " + target.getName() + "!");
-        target.receiveDamage(totalDamage);
+        int baseDamage = this.damage + weapon.getDamage();
+        int totalDamage = (int) (baseDamage * 1.5);
+
+        String targetName = (target instanceof Character) ? ((Character)target).getName() : "Target";
+        System.out.println(this.name + " (Warrior) performs a POWERFUL STRIKE on " + targetName + "!");
+        System.out.println("Base Damage: " + baseDamage + " → Enhanced: " + totalDamage + " (1.5x multiplier)");
+
+        target.takeDamage(totalDamage);
     }
+    @Override
+    public void takeDamage(int amount) {
+        int damageAfterArmor = amount - armorValue;
+        if (damageAfterArmor < 0) damageAfterArmor = 0;
+        int finalDamage = damageAfterArmor - defense;
+        if (finalDamage < 0) finalDamage = 0;
+
+        System.out.println(name + "'s Armor: " + armorValue + " (reduces damage from " + amount + " to " + damageAfterArmor + ")");
+        System.out.println(name + "'s Defense: " + defense + " (reduces damage from " + damageAfterArmor + " to " + finalDamage + ")");
+        System.out.println("Actual Damage Taken: " + finalDamage);
+
+        this.hp = Math.max(0, this.hp - finalDamage);
+        System.out.println(name + "'s HP: " + hp + "/" + maxHp);
+    }
+
 
     @Override
     public void receiveDamage(int amount) {
@@ -28,8 +47,9 @@ public class Warrior extends Character {
     public void displayCharacterDetails() {
         super.displayCharacterDetails();
         System.out.println("Armor Value: " + armorValue);
-        if (weapon != null) {
-            System.out.println("Weapon: " + weapon.getName() + " (Type: " + weapon.getType() + ", Damage: " + weapon.getDamage() + ", Ability: " + weapon.getAbility() + ")");
-        }
+        System.out.println("Weapon: " + weapon.getName() + " (Type: " + weapon.getType() + ", Damage: " + weapon.getDamage() + ", Ability: " + weapon.getAbility() + ")");
+
     }
+
+
 }

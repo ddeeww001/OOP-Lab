@@ -1,32 +1,45 @@
 package com.rpg.lab04;
+public class Mage extends Character implements Destructible{
+    private int mana, maxMana;
 
-public class Mage extends Character {
-    private int mana;
-    private int maxMana;
+    public Mage(String name, int level, int maxHp, int damage, int defense, int mana, Weapon weapon) {
+        super(name, level, maxHp, damage, defense, weapon, "Mage");
+        this.mana = mana; this.maxMana = mana;
+    }
 
-    public Mage(String name, int level, int maxHp, int damage, int defense, int maxMana, Weapon weapon) {
-        super(name, level, maxHp, damage, defense, weapon);
-        this.type = "Mage";
-        this.maxMana = maxMana;
-        this.mana = maxMana - 30; // Just simulating used mana for output matching
+
+    public void attack(Destructible target) {
+        if(mana < 30) {
+            System.out.println(name + " attempts to cast Magic Missile, but has insufficient mana!");
+            System.out.println("Current Mana: " + mana + "/" + maxMana + " (Need: 30)");
+            return;
+        }
+        int spellDamage = 40 + 10;
+        mana -= 30;
+        String targetName = (target instanceof Character) ? ((Character)target).getName() : "Target";
+        System.out.println(name + " (Mage) casts MAGIC MISSILE at " + targetName + "!");
+        System.out.println("Spell Damage: " + spellDamage + " (Base: 40 + Spell Bonus: 10)");
+        System.out.println("Mana Used: 30 | Remaining: " + mana + "/" + maxMana);
+
+        target.takeDamage(spellDamage);
     }
 
     @Override
-    public void attack(Character target) {
-        int totalDamage = this.damage + weapon.getDamage();
-        System.out.println(this.name + " casts Magic Missile on " + target.getName() + "!");
-        target.receiveDamage(totalDamage);
+    public void takeDamage(int amount) {
+        int actualDamage = amount - defense;
+        if (actualDamage < 0) actualDamage = 0;
+        System.out.println(name + "'s Defense: " + defense + " (reduces damage from " + amount + " to " + actualDamage + ")");
+        System.out.println("Actual Damage Taken: " + actualDamage);
+
+        this.hp = Math.max(0, this.hp - actualDamage);
+        System.out.println(name + "'s HP: " + hp + "/" + maxHp);
     }
 
     @Override
     public void displayCharacterDetails() {
-        System.out.println("--- " + name.toUpperCase() + " (" + type.toUpperCase() + ") ---");
-        System.out.println("Status: Active");
-        System.out.println("Level: " + level);
-        System.out.println("Health Points: " + hp + "/" + maxHp);
+        super.displayCharacterDetails();
         System.out.println("Mana: " + mana + "/" + maxMana);
-        System.out.println("Damage: " + damage);
-        System.out.println("Defense: " + defense);
         System.out.println("Weapon: " + weapon.getName() + " (Type: " + weapon.getType() + ", Damage: " + weapon.getDamage() + ", Ability: " + weapon.getAbility() + ")");
     }
+
 }

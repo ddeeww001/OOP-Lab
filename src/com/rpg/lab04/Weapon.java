@@ -17,4 +17,6 @@ public class Weapon {
     public String getType() { return type; }
     public int getDamage() { return damage; }
     public String getAbility() { return ability; }
+
+
 }
