@@ -8,8 +8,9 @@ public class Warrior extends Character {
         this.armorValue = armorValue;
     }
 
+    // 🌟 จุดสำคัญ: เปลี่ยนพารามิเตอร์เป็น Destructible target
     @Override
-    public void attack(Character target) {
+    public void attack(Destructible target) {
         int baseDamage = this.damage + weapon.getDamage();
         int totalDamage = (int) (baseDamage * 1.5);
 
@@ -19,6 +20,7 @@ public class Warrior extends Character {
 
         target.takeDamage(totalDamage);
     }
+
     @Override
     public void takeDamage(int amount) {
         int damageAfterArmor = amount - armorValue;
@@ -34,22 +36,12 @@ public class Warrior extends Character {
         System.out.println(name + "'s HP: " + hp + "/" + maxHp);
     }
 
-
-    @Override
-    public void receiveDamage(int amount) {
-        // Reduces incoming damage by armor before standard defense calculation
-        int reducedDamage = amount - armorValue;
-        if (reducedDamage < 0) reducedDamage = 0;
-        super.receiveDamage(reducedDamage);
-    }
-
     @Override
     public void displayCharacterDetails() {
         super.displayCharacterDetails();
         System.out.println("Armor Value: " + armorValue);
-        System.out.println("Weapon: " + weapon.getName() + " (Type: " + weapon.getType() + ", Damage: " + weapon.getDamage() + ", Ability: " + weapon.getAbility() + ")");
-
+        if (weapon != null) {
+            System.out.println("Weapon: " + weapon.getName() + " (Type: " + weapon.getType() + ", Damage: " + weapon.getDamage() + ", Ability: " + weapon.getAbility() + ")");
+        }
     }
-
-
 }

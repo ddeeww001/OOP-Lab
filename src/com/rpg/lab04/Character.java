@@ -1,6 +1,6 @@
 package com.rpg.lab04;
 
-public class Character implements Destructible {
+public abstract class Character implements Destructible {
     protected String name;
     protected int level;
     protected int maxHp;
@@ -38,7 +38,7 @@ public class Character implements Destructible {
 
     public String getName() { return name; }
 
-    public void attack(Character target) {
+   /*public void attack(Character target) {
         int totalDamage = this.damage + weapon.getDamage();
         totalDamage -= this.defense;
         if(totalDamage < 0){
@@ -54,7 +54,8 @@ public class Character implements Destructible {
         }
         System.out.println(this.name + " (" + this.type + ") attacks " + target.getName() + " with " + weapon.getName() + "!");
         target.receiveDamage(totalDamage);
-    }
+    }*/
+   public abstract void attack(Destructible target);
 
     public void receiveDamage(int amount) {
         int actualDamage = amount - defense;

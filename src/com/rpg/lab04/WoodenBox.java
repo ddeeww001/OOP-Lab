@@ -23,6 +23,7 @@ public class WoodenBox implements Destructible {
     @Override
     public boolean isDestroyed() { return hp <= 0; }
 
+    // 🌟 เพิ่มเมธอดนี้เข้ามาเพื่อให้ Main เรียกใช้ได้
     public void breakOpen() {
         if (isDestroyed()) {
             if (locked) System.out.print("The lock broke! ");
@@ -32,6 +33,7 @@ public class WoodenBox implements Destructible {
         }
     }
 
+    // 🌟 เพิ่มเมธอดนี้เข้ามาเพื่อให้ Main เรียกใช้ได้
     public void displayBoxDetails() {
         System.out.println("--- " + name.toUpperCase() + " (WOODEN BOX) ---");
         System.out.println("Status: " + (isDestroyed() ? "Destroyed" : "Intact"));

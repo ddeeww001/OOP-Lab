@@ -7,7 +7,7 @@ public class Mage extends Character implements Destructible{
         this.mana = mana; this.maxMana = mana;
     }
 
-
+    @Override
     public void attack(Destructible target) {
         if(mana < 30) {
             System.out.println(name + " attempts to cast Magic Missile, but has insufficient mana!");

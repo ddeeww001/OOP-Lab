@@ -9,6 +9,7 @@ public class Archer extends Character {
     }
 
 
+    @Override
     public void attack(Destructible target) {
         int baseDmg = 40;
         int rangeBonus = 12;

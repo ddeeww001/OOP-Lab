@@ -31,6 +31,11 @@ public class Healer extends Character  {
     }
 
     @Override
+    public void attack(Destructible target) {
+
+    }
+
+    @Override
     public void displayCharacterDetails() {
         super.displayCharacterDetails();
         System.out.println("Healing Power: " + getHealingPower());
