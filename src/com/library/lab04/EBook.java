@@ -50,16 +50,18 @@ public class EBook extends LibraryItem implements DigitalContent, Taxable {
 
     @Override
     public void streamOnline() {
-
+//hw
     }
 
     @Override
     public void download() {
-
+//hw
     }
 
     @Override
-    public void calculateTax() {
-
+    public double calculateTax() {
+        double standardEBookPrice = 99.0;
+        double digitalTax = 0.05;
+        return standardEBookPrice * digitalTax;
     }
 }

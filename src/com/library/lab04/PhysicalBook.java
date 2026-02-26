@@ -1,6 +1,6 @@
 package com.library.lab04;
 
-public class PhysicalBook extends LibraryItem {
+public class PhysicalBook extends LibraryItem implements Taxable {
     private String shelfLocation;
 
     public PhysicalBook(String title, String author, String isbn, double price, String shelfLocation) {
@@ -27,5 +27,11 @@ public class PhysicalBook extends LibraryItem {
     @Override
     public void printSummary() {
         System.out.println("PhysicalBook[Title='" + title + "', Location='" + shelfLocation + "', Status='" + (isAvailable ? "Available" : "Borrowed") + "']");
+    }
+
+    @Override
+    public void calculateTax() {
+        double digitalTax = 0.07;
+        return getPrice() * digitalTax ;
     }
 }
