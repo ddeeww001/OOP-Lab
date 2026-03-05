@@ -32,26 +32,26 @@ public abstract class LibraryItem {
             return;
         }
 
-        // โค้ดส่วนนี้จะวิ่งไปเช็คเงื่อนไขใน canBorrow() ที่เราเพิ่งแก้ด้านบน
+        // ถ้า canBorrow คืนค่า false แปลว่ายืมไม่ได้ ต้อง "return;" เพื่อหยุดทำงานทันที!
         if (!member.canBorrow(this)) {
-            System.out.println("Error: Item '" + title + "' cannot be checked out. Limit reached.");
-            return;
+            System.out.println("Borrow request denied for member " + member.getName() + ".");
+            return; // 🌟 บรรทัดนี้สำคัญมาก! ถ้าไม่มีบรรทัดนี้ หนังสือจะถูกล็อก
         }
 
+        // โค้ดด้านล่างนี้จะทำงานก็ต่อเมื่อผ่านเงื่อนไขด้านบนมาแล้วเท่านั้น
         this.isAvailable = false;
         this.borrower = member;
 
-        // ดึงจำนวนวันยืมจาก Strategy (เช่น 14, 21, หรือ 30 วัน)
         int loanDays = member.getMembershipStrategy().getLoanPeriodDays();
-        this.dueDate = LocalDate.now().plusDays(loanDays);
+        this.dueDate = java.time.LocalDate.now().plusDays(loanDays);
 
-        member.borrowItem(); // ตรงนี้จะไปบวกค่าให้ตัวแปร borrowedCount
+        member.borrowItem();
 
         System.out.println("Item '" + title + "' has been checked out successfully.");
-        System.out.println("Item '" + title + "' has been borrowed by " + member.getName() + ".");
+        System.out.println("Borrowed by " + member.getName() + " (" + member.getMembershipStrategy().getMembershipType() + ")");
+        System.out.println("Loan Period: " + loanDays + " days");
         System.out.println("Return Due Date: " + this.dueDate);
     }
-
 
     public void returnItem() {
         if (!isAvailable) {

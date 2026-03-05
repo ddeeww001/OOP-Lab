@@ -1,7 +1,7 @@
 package com.library.lab05;
 
 public class BasicMembershipStrategy implements MembershipStrategy {
-    private static final int BORROW_LIMIT = 6;
+    private static final int BORROW_LIMIT = 1;
     private static final int LOAN_PERIOD = 14;
     private static final double MEMBERSHIP_COST = 0.0; // Free
     @Override

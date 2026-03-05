@@ -5,14 +5,12 @@ import javax.management.MalformedObjectNameException;
 public class Member {
     private String memberId;
     private String name;
-    private int borrowedCount;
+    private int borrowedCount = 0;
     private MembershipStrategy membershipStrategy;
-    private int borrowCount=0;
 
     public Member(String memberId, String name,MembershipStrategy membershipStrategy) {
         this.memberId = memberId;
         this.name = name;
-        this.borrowedCount = 0;
         this.membershipStrategy = membershipStrategy;
     }
 
@@ -29,13 +27,7 @@ public class Member {
         this.membershipStrategy = membershipStrategy;
     }
 
-    public int getBorrowCount() {
-        return borrowCount;
-    }
 
-    public void setBorrowCount(int borrowCount) {
-        this.borrowCount = borrowCount;
-    }
 
     public String getMemberId() {
         return memberId;
@@ -53,19 +45,21 @@ public class Member {
         this.borrowedCount = borrowedCount;
     }
 
-    public boolean canBorrow(LibraryItem item){
-        if(item == null){
-            return  false;
-        }
-        int limit = membershipStrategy.getBorrowLimit();
-        if(membershipStrategy.hasUnlimitedBorrowing()){
-            return true;
-        }
-        if(borrowCount >= limit){
-            // ใช้ %s สำหรับ String/Object และ %d สำหรับตัวเลข
-            System.out.printf("Member: %s, Limit: %d, Strategy: %s%n", name, limit, membershipStrategy.getMembershipType());
+    public boolean canBorrow(LibraryItem item) {
+        if (item == null) {
             return false;
         }
+
+        if (membershipStrategy.hasUnlimitedBorrowing()) {
+            return true;
+        }
+
+        int limit = membershipStrategy.getBorrowLimit();
+        if (this.borrowedCount >= limit) {
+            System.out.println("Member " + this.getName() + " has reached the borrow limit (" + limit + ") for " + membershipStrategy.getMembershipType() + ".");
+            return false;
+        }
+
         return true;
     }
 
@@ -79,13 +73,18 @@ public class Member {
 
     public void displayMemberInfo() {
         System.out.println("--- MEMBER INFORMATION ---");
-        System.out.println("ID:"+getMemberId());
-        System.out.println("NAME:"+getName());
-        System.out.println("Membership type:"+getMembershipStrategy());
-        System.out.println("Membership cost:"+membershipStrategy.getMembershipCost()+"Baht");
-        System.out.println("Borrow limit:"+membershipStrategy.hasUnlimitedBorrowing()+"Unlimit");
-        System.out.println("Currently borrow"+membershipStrategy.getBorrowLimit());
-        System.out.println("leon preriot "+ membershipStrategy.getLoanPeriodDays()+"day");
+        System.out.println("ID: " + getMemberId());
+        System.out.println("Name: " + getName());
+        System.out.println("Membership Type: " + membershipStrategy.getMembershipType());
+        System.out.println("Membership Cost: " + membershipStrategy.getMembershipCost() + " Baht");
 
+        if (membershipStrategy.hasUnlimitedBorrowing()) {
+            System.out.println("Borrow Limit: Unlimited");
+        } else {
+            System.out.println("Borrow Limit: " + membershipStrategy.getBorrowLimit());
+        }
+
+        System.out.println("Currently Borrowed: " + borrowedCount);
+        System.out.println("Loan Period: " + membershipStrategy.getLoanPeriodDays() + " days");
     }
 }
