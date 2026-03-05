@@ -1,8 +1,4 @@
 package com.library.lab05;
-
-
-import com.library.lab04.Member;
-
 import java.time.LocalDate;
 
 public abstract class LibraryItem {
@@ -12,7 +8,7 @@ public abstract class LibraryItem {
     protected double price;
     protected boolean isAvailable;
     protected String borrowBy;
-    protected com.library.lab04.Member borrower;
+    Member borrower;
     protected LocalDate dueDate;
 
     public LibraryItem(String title, String author, String isbn, double price) {
@@ -29,25 +25,33 @@ public abstract class LibraryItem {
     public abstract double calculateLateFee(int days);
     public abstract void printSummary();
 
-    public void checkOut(com.library.lab04.Member member) {
+    public void checkOut(Member member) {
+
         if (!isAvailable) {
             System.out.println("Error: Item '" + title + "' is already borrowed and cannot be checked out again.");
             return;
         }
-        if (member.getBorrowedCount() >= 3) { // Example limit
+
+        // โค้ดส่วนนี้จะวิ่งไปเช็คเงื่อนไขใน canBorrow() ที่เราเพิ่งแก้ด้านบน
+        if (!member.canBorrow(this)) {
             System.out.println("Error: Item '" + title + "' cannot be checked out. Limit reached.");
             return;
         }
 
         this.isAvailable = false;
         this.borrower = member;
-        this.dueDate = LocalDate.now().plusDays(14); // 2-week borrow period
-        member.borrowItem();
+
+        // ดึงจำนวนวันยืมจาก Strategy (เช่น 14, 21, หรือ 30 วัน)
+        int loanDays = member.getMembershipStrategy().getLoanPeriodDays();
+        this.dueDate = LocalDate.now().plusDays(loanDays);
+
+        member.borrowItem(); // ตรงนี้จะไปบวกค่าให้ตัวแปร borrowedCount
 
         System.out.println("Item '" + title + "' has been checked out successfully.");
         System.out.println("Item '" + title + "' has been borrowed by " + member.getName() + ".");
         System.out.println("Return Due Date: " + this.dueDate);
     }
+
 
     public void returnItem() {
         if (!isAvailable) {
@@ -99,7 +103,7 @@ public abstract class LibraryItem {
         isAvailable = available;
     }
 
-    public com.library.lab04.Member getBorrower() {
+    Member getBorrower() {
         return borrower;
     }
 

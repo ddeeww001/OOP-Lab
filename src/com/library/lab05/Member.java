@@ -61,11 +61,20 @@ public class Member {
         if(membershipStrategy.hasUnlimitedBorrowing()){
             return true;
         }
-        if(borrowCount >=limit){
-            System.out.println(""memberName,limit,getMembershipStrategy());
+        if(borrowCount >= limit){
+            // ใช้ %s สำหรับ String/Object และ %d สำหรับตัวเลข
+            System.out.printf("Member: %s, Limit: %d, Strategy: %s%n", name, limit, membershipStrategy.getMembershipType());
             return false;
         }
         return true;
+    }
+
+
+    public double calculateLateFee(double baseFee) {
+        if (membershipStrategy != null) {
+            return membershipStrategy.applyLateFeeDiscount(baseFee);
+        }
+        return baseFee;
     }
 
     public void displayMemberInfo() {
