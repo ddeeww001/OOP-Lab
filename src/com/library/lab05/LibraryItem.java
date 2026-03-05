@@ -1,5 +1,8 @@
 package com.library.lab05;
 
+
+import com.library.lab04.Member;
+
 import java.time.LocalDate;
 
 public abstract class LibraryItem {
@@ -8,7 +11,8 @@ public abstract class LibraryItem {
     protected String isbn;
     protected double price;
     protected boolean isAvailable;
-    protected Member borrower;
+    protected String borrowBy;
+    protected com.library.lab04.Member borrower;
     protected LocalDate dueDate;
 
     public LibraryItem(String title, String author, String isbn, double price) {
@@ -25,7 +29,7 @@ public abstract class LibraryItem {
     public abstract double calculateLateFee(int days);
     public abstract void printSummary();
 
-    public void checkOut(Member member) {
+    public void checkOut(com.library.lab04.Member member) {
         if (!isAvailable) {
             System.out.println("Error: Item '" + title + "' is already borrowed and cannot be checked out again.");
             return;
@@ -95,7 +99,7 @@ public abstract class LibraryItem {
         isAvailable = available;
     }
 
-    public Member getBorrower() {
+    public com.library.lab04.Member getBorrower() {
         return borrower;
     }
 

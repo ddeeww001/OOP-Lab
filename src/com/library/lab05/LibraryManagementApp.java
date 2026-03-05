@@ -1,152 +1,107 @@
 package com.library.lab05;
-
-import java.util.ArrayList;
-import java.util.List;
 public class LibraryManagementApp {
     public static void main(String[] args) {
-        System.out.println("\n" + "=".repeat(60));
-        System.out.println(" LIBRARY MANAGEMENT SYSTEM - POLYMORPHISM DEMO");
-        System.out.println("=".repeat(60));
-// Create a list of LibraryItem (demonstrates polymorphism)
-        List<LibraryItem> items = new ArrayList<>();
+// ==================== SINGLETON PATTERN DEMO ====================
+        System.out.println("\n" + "=".repeat(70));
+        System.out.println(" DESIGN PATTERNS: SINGLETON & STRATEGY");
+        System.out.println("=".repeat(70));
+// Get the single instance of LibrarySystem (Singleton Pattern)
+        System.out.println("\n[STEP 1] Initializing LibrarySystem (Singleton Pattern):");
+        LibrarySystem librarySystem = LibrarySystem.getInstance();
+// Try to get instance again - should return same instance
+        System.out.println("Getting LibrarySystem instance again:");
+        LibrarySystem sameInstance = LibrarySystem.getInstance();
+        System.out.println(" ✅ Same instance? " + (librarySystem ==
+                sameInstance));
+// ==================== CREATE LIBRARY ITEMS ====================
+        System.out.println("\n[STEP 2] Creating Library Items:");
 // Add Physical Books
-        items.add(new PhysicalBook("Java Programming", "John Smith", "978-0134685991",
-                450.0, "A1-04"));
-        items.add(new PhysicalBook("Clean Code", "Robert Martin", "978-0132350884",
-                520.0, "B2-15"));
-        items.add(new PhysicalBook("Design Patterns", "Gang of Four", "978-0201633612",
-                680.0, "A3-22"));
+        PhysicalBook book1 = new PhysicalBook("Java Programming", "John Smith", "978-0134685991", 450.0, "A1-04");
+                PhysicalBook book2 = new PhysicalBook("Clean Code", "Robert Martin", "978-0132350884", 520.0, "B2-15");
+                PhysicalBook book3 = new PhysicalBook("Design Patterns", "Gang of Four",
+                "978-0201633612", 680.0, "A3-22");
+        PhysicalBook book4 = new PhysicalBook("The Art of War", "Sun Tzu", "978-1599869773", 250.0, "C1-10");
+                PhysicalBook book5 = new PhysicalBook("Refactoring", "Martin Fowler", "978-0134757599", 550.0, "A2-08");
+                librarySystem.addItem(book1);
+                librarySystem.addItem(book2);
+                librarySystem.addItem(book3);
+                librarySystem.addItem(book4);
+                librarySystem.addItem(book5);
 // Add E-Books
-        items.add(new EBook("Effective Java", "Joshua Bloch", "978-0134685991",
-                "https://library.ebooks.com/effective-java.pdf", 5.2));
-        items.add(new EBook("Python Crash Course", "Eric Matthes", "978-1593279288",
-                "https://library.ebooks.com/python-crash.pdf", 8.7));
-// Instantiate member object
-        Member member1 = new Member("M001", "Somsak");
-        Member member2 = new Member("M002", "Suda");
-// Display all items using polymorphism
-        System.out.println("\n--- ALL LIBRARY ITEMS (Polymorphism Demo) ---");
-        System.out.println("Calling printSummary() on each item in the list:");
-        System.out.println();
-        for (LibraryItem item : items) {
-            item.printSummary();
+        EBook ebook1 = new EBook("Effective Java", "Joshua Bloch", "978-0134685991", "https://library.ebooks.com/effective-java.pdf", 5.2);
+        EBook ebook2 = new EBook("Python Crash Course", "Eric Matthes", "978-1593279288",
+                "https://library.ebooks.com/python-crash.pdf", 8.7);
+        librarySystem.addItem(ebook1);
+        librarySystem.addItem(ebook2);
+// ==================== STRATEGY PATTERN: CREATE MEMBERS WITH DIFFERENT
+// STRATEGIES ====================
+        System.out.println("\n" + "=".repeat(70));
+        System.out.println(" [STEP 3] STRATEGY PATTERN: Creating Members with Different Strategies");
+                System.out.println("=".repeat(70));
+        System.out.println("\n✨ KEY CONCEPT: Each member has a MembershipStrategy!");
+        System.out.println(" Strategy determines: borrow limit, loan period, late fee discount\n");
+// Create members with different strategies
+                Member basicMember = new Member("M001", "Somsak", new BasicMembershipStrategy());
+        Member studentMember = new Member("M002", "Suda", new StudentMembershipStrategy());
+        Member premiumMember = new Member("M003", "Somchai", new PremiumMembershipStrategy());
+        librarySystem.addMember(basicMember);
+        librarySystem.addMember(studentMember);
+        librarySystem.addMember(premiumMember);
+// Display member information
+        System.out.println("--- MEMBER INFORMATION ---");
+        for (Member member : librarySystem.getAllMembers()) {
+            member.displayMemberInfo();
         }
-// Demonstrate checkOut() method
-        System.out.println("\n--- TESTING CHECKOUT FUNCTIONALITY ---");
-        System.out.println("\nMember Somsak borrows Physical Book:");
-        items.get(0).checkOut(member1);
-        System.out.println("\nMember Suda borrows E-Book:");
-        items.get(4).checkOut(member2);
-        System.out.println("\nAttempting to checkout an already borrowed item:");
-        items.get(0).checkOut(member2);
-// Display items after checkout using polymorphism
-        System.out.println("\n--- ITEMS STATUS AFTER CHECKOUT ---");
-        for (LibraryItem item : items) {
-            item.displayDetails();
-        }
-// Demonstrate returnItem() method
-        System.out.println("\n--- TESTING RETURN FUNCTIONALITY ---");
-        System.out.println("\nReturning Physical Book:");
-        items.get(0).returnItem();
-// Test borrowing limit
-        System.out.println("\n--- TESTING BORROW LIMIT ---");
-        items.get(0).checkOut(member1);
-        items.get(1).checkOut(member1);
-        items.get(2).checkOut(member1);
-        items.get(3).checkOut(member1); // Should be denied (limit reached)
-// ==================== METHOD OVERRIDING: Late Fee Demo ====================
-        System.out.println("\n" + "=".repeat(60));
-        System.out.println(" METHOD OVERRIDING: LATE FEE CALCULATION DEMO");
-        System.out.println("=".repeat(60));
-// Simulate late returns
-        int daysLate = 5;
-        System.out.println("\n--- Late Fee Calculation (" + daysLate + " days late) --- ");
-                System.out.println("\nPhysical Books (5 Baht per day late fee) and E-Books (NO late fees - files auto-expire):");
-        for (LibraryItem item : items) {
-            double lateFee = item.calculateLateFee(daysLate);
-            System.out.printf(" %s: %.2f Baht\n", item.getTitle(), lateFee);
-        }
-// ==================== INTERFACE IMPLEMENTATION: Digital Content & Taxable Demo
-        System.out.println("\n" + "=".repeat(60));
-        System.out.println(" INTERFACE IMPLEMENTATION: DIGITAL CONTENT & TAXABLE DEMO");
-        System.out.println("=".repeat(60));
-// Demonstrate Digital Content Interface
-        System.out.println("\n--- DIGITAL CONTENT INTERFACE ---");
-        System.out.println("Processing Digital Content for EBooks (DigitalContent interface):");
-        System.out.println("Note: Only EBooks implement DigitalContent, PhysicalBooks do NOT.\n");
-// This works because EBook implements DigitalContent
-        for (LibraryItem item : items) {
-            if (item instanceof DigitalContent) {
-                DigitalContent digitalBook = (DigitalContent) item;//😵😵😵
-                System.out.println("Processing EBook: " + item.getTitle());
-                processDigitalAccess(digitalBook);
-            }
-        }
-// Demonstrate Taxable Interface
-        System.out.println("\n--- TAXABLE INTERFACE ---");
-        System.out.println("Processing Tax Calculation (Taxable interface):");
-        System.out.println("Both EBooks and PhysicalBooks implement Taxable.\n");
-        System.out.println("Tax Calculation for Physical Books (7% tax) and E-Books (5% digital tax):");
-        for (LibraryItem item : items) {
-            Taxable taxableItem = (Taxable) item;
-            double tax = taxableItem.calculateTax();
-            System.out.printf(" %s: Price = %.2f Baht, Tax = %.2f Baht, Total = %.2f Baht\n",
-                    item.getTitle(), item.getPrice(), tax, item.getPrice() + tax);
-        }
-        // Create a list for DigitalContent items (can contain both EBooks and Movies!)
-        List<DigitalContent> digitalContent = new ArrayList<>();
-// Add movies (NOTE: Movies do NOT inherit from LibraryItem!)
-        LibraryMovie movie1 = new LibraryMovie("The Matrix", "Lana Wachowski",
-                "https://streaming.library.com/matrix.mp4", 136, 1999, "Sci-Fi", 199.0);
-        LibraryMovie movie2 = new LibraryMovie("Inception", "Christopher Nolan",
-                "https://streaming.library.com/inception.mp4", 148, 2010, "Sci-Fi/Thriller", 249.0);
-// Add them to the digital content list
-        digitalContent.add(movie1);
-        digitalContent.add(movie2);
-// Also add ebooks to the digital content list
-        digitalContent.add(new EBook("Effective Java", "Joshua Bloch", "978-0134685991",
-                "https://library.ebooks.com/effective-java.pdf", 5.2));
-// Demonstrate the Universal Streaming Player
-        System.out.println("\n" + "=".repeat(60));
-        System.out.println(" UNIVERSAL STREAMING PLAYER (Polymorphism via Interfaces)");
-        System.out.println("=".repeat(60));
-        System.out.println("\nThis demonstrates interface-based polymorphism:");
-        System.out.println("A single player can handle BOTH movies and e-books!\n");
-// Play through each digital content without caring about their actual type
-        for (DigitalContent content : digitalContent) {
-            if (content instanceof LibraryMovie) {
-                LibraryMovie movie = (LibraryMovie) content;
-                System.out.println(" STREAMING PLAYER - Playing Movie: " + movie.getTitle());
-            } else if (content instanceof EBook) {
-                EBook book = (EBook) content;
-                System.out.println(" STREAMING PLAYER - Reading E-Book: " + book.getTitle());
-            }
-            System.out.println("---");
-            launchStreamingPlayer(content);
-        }
+// ==================== STRATEGY PATTERN: TESTING DIFFERENT BORROW BEHAVIORS
+        System.out.println("\n" + "=".repeat(70));
+        System.out.println(" [STEP 4] STRATEGY PATTERN: Testing Different Borrow Behaviors");
+                System.out.println("=".repeat(70));
+        System.out.println("\n✨ Each member type has different borrow limits and loan periods!\n");
+// Basic Member borrows (limit: 1, period: 14 days)
+        System.out.println("--- Basic Member (Somsak) Borrows ---");
+        book1.checkOut(basicMember);
+// Student Member borrows (limit: 5, period: 21 days)
+        System.out.println("\n--- Student Member (Suda) Borrows ---");
+        book2.checkOut(studentMember);
+// Premium Member borrows (unlimited, period: 30 days)
+        System.out.println("\n--- Premium Member (Somchai) Borrows ---");
+        book3.checkOut(premiumMember);
+        ebook1.checkOut(premiumMember);
+        ebook2.checkOut(premiumMember); // Premium can borrow unlimited!
+// ==================== STRATEGY PATTERN: LATE FEE COMPARISON
+        System.out.println("\n" + "=".repeat(70));
+        System.out.println(" [STEP 5] STRATEGY PATTERN: Late Fee Discounts");
+        System.out.println("=".repeat(70));
+        System.out.println("\n✨ Different membership types get different late fee discounts!\n");
+        double baseFee = 100.0;
+        System.out.println("Base Late Fee: " + baseFee + " Baht\n");
+        System.out.println("1️⃣ Basic Member (No discount):");
+        double basicFee = basicMember.calculateLateFee(baseFee);
+        System.out.println(" Final: " + basicFee + " Baht\n");
+        System.out.println("2️⃣ Student Member (20% discount):");
+        double studentFee = studentMember.calculateLateFee(baseFee);
+        System.out.println(" Final: " + studentFee + " Baht\n");
+        System.out.println("3️⃣ Premium Member (100% FREE!):");
+        double premiumFee = premiumMember.calculateLateFee(baseFee);
+        System.out.println(" Final: " + premiumFee + " Baht\n");
+// ==================== STRATEGY PATTERN: RUNTIME STRATEGY CHANGE
+        System.out.println("\n" + "=".repeat(70));
+        System.out.println(" [STEP 5] STRATEGY PATTERN: Changing Strategy at Runtime");
+                System.out.println("=".repeat(70));
+        System.out.println("\n✨ KEY CONCEPT: Members can upgrade/downgrade membership dynamically!\n");
+// Basic member upgrades to Premium
+        System.out.println("--- Somsak (MemberID:M001) Upgrades from Basic to Premium ---");
+                Member somsak = librarySystem.findMemberById("M001");
+// Somsak tries to borrow more than basic limit
+        System.out.println("\n--- Before Upgrade: Somsak can only borrow 1 item --- ");
+                book5.checkOut(basicMember); // Should fail (limit reached)
+// Upgrade to Premium!
+        somsak.setMembershipStrategy(new PremiumMembershipStrategy());
+        somsak.displayMemberInfo();
+// Now Somsak can borrow more items!
+        System.out.println("\n--- After Upgrade: Somsak can now borrow more! ---");
+        book5.checkOut(basicMember); // Now unlimited!
+// ==================== LIBRARY SYSTEM STATISTICS ====================
+        librarySystem.displayStatistics();
     }
-    public static void launchStreamingPlayer(DigitalContent content) {
-        System.out.println("Connecting to streaming service...");
-        System.out.println("Loading content...\n");
-        content.streamOnline();
-        System.out.println("User requests offline copy:");
-        content.download();
-    }
-    /**
-     * Universal Streaming Player - Works with ANY DigitalContent object!
-     * This method demonstrates polymorphism through interfaces.
-     * It doesn't care if it's a Movie or EBook - both implement DigitalContent!
-     *
-     * @param item Any object that implements DigitalContent (Movie, EBook, etc.)
-     */
-    public static void processDigitalAccess(DigitalContent item) {
-        System.out.println("Connecting to streaming service...");
-        System.out.println("Loading content...\n");
-        item.streamOnline();
-        System.out.println("User requests offline copy:");
-        item.download();
-    }
-
-
-
 }
