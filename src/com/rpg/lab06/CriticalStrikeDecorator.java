@@ -16,8 +16,7 @@ public class CriticalStrikeDecorator extends AttackDecorator {
             attacker.setDamage(originalDamage * 2);
             String targetName = (target instanceof Character) ? ((Character)
                     target).getName() : "Target";
-            System.out.println("\n💥 " + attacker.getName() + " lands a CRITICAL
-                    STRIKE on" + targetName + " !");
+            System.out.println("\n💥 " + attacker.getName() + " lands a CRITICAL STRIKE on" + targetName + " !");
             System.out.println(" Base Damage: " + originalDamage + " -> Critical: " +
                     attacker.getDamage() + " (2x)");
         }

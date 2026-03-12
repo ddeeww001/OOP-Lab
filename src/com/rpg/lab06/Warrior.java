@@ -9,17 +9,9 @@ public class Warrior extends Character {
     }
 
     // 🌟 จุดสำคัญ: เปลี่ยนพารามิเตอร์เป็น Destructible target
-   /* @Override
+    @Override
     public void attack(Destructible target) {
-        int baseDamage = this.damage + weapon.getDamage();
-        int totalDamage = (int) (baseDamage * 1.5);
-
-        String targetName = (target instanceof Character) ? ((Character)target).getName() : "Target";
-        System.out.println(this.name + " (Warrior) performs a POWERFUL STRIKE on " + targetName + "!");
-        System.out.println("Base Damage: " + baseDamage + " → Enhanced: " + totalDamage + " (1.5x multiplier)");
-
-        target.takeDamage(totalDamage);
-    }*/
+    }
 
     @Override
     public void takeDamage(int amount) {

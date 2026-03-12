@@ -9,6 +9,7 @@ public abstract class Character implements Destructible {
     protected int defense;
     protected Weapon weapon;
     protected String type;
+    protected Attack attack;
 
     protected boolean Alive = true;
 
@@ -151,4 +152,11 @@ public abstract class Character implements Destructible {
         return this.hp <= 0 ;
     }
 
+    public void setAttack(LifeStealDecorator lifeStealDecorator) {
+        lifeStealDecorator = (LifeStealDecorator) this.attack;
+    }
+
+    public Attack getAttack(Attack attack) {
+        return attack;
+    }
 }
