@@ -20,8 +20,7 @@ public class ArcherStyleDecorator extends AttackDecorator {
             return;
         }
         int originalDamage = archer.getDamage();
-        int bonusDamage = archer.hasRangeAdvantage() ? (int)
-                Math.round(originalDamage * 0.3) : 0;
+        int bonusDamage = archer.hasRangeAdvantage() ? (int) Math.round(originalDamage * 0.3) : 0;
         int enhancedDamage = originalDamage + bonusDamage;
         archer.setDamage(enhancedDamage);
         System.out.println("\n🏹 " + archer.getName() + " (Archer) shoots a precise arrow at " + targetName + "!");
