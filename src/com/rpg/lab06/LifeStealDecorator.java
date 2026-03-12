@@ -16,7 +16,7 @@ public class LifeStealDecorator extends AttackDecorator {
         if (!attacker.isAlive()) {
             return;
         }
-        int healBase = attacker.getDamage() + attacker.getWeapon().getBaseDamage();
+        int healBase = attacker.getDamage() + attacker.getWeapon().getDamage();
         int healAmount = Math.max(1, (int) Math.round(healBase * ratio));
         int missing = attacker.getMaxHp() - attacker.getHp();
         if (missing <= 0) {

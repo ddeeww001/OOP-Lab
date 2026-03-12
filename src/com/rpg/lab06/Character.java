@@ -10,15 +10,8 @@ public abstract class Character implements Destructible {
     protected Weapon weapon;
     protected String type;
     protected Attack attack;
+    protected boolean isAlive;
 
-    protected boolean Alive = true;
-
-    public void heal(int heal){
-        this.hp += heal;
-        if(this.hp>this.maxHp){
-            this.hp=this.maxHp;
-        }
-    }
 
     public Character(String name, int level, int maxHp, int damage, int defense, Weapon weapon, String type) {
         this.name = name;
@@ -29,6 +22,9 @@ public abstract class Character implements Destructible {
         this.defense = defense;
         this.weapon = weapon;
         this.type = type;
+        this.isAlive = true;
+        this.attack = new BaseAttack();
+
     }
 
     // Overloaded constructor for heroes (defaults type to role)
@@ -36,28 +32,39 @@ public abstract class Character implements Destructible {
         this(name, level, maxHp, damage, defense, weapon, "Hero");
     }
 
+    public void heal(int heal){
+        this.hp += heal;
+        if(this.hp>this.maxHp){
+            this.hp=this.maxHp;
+        }
+    }
+
 
     public String getName() { return name; }
 
-   public void attack(Character attacker, Destructible target) {
-        System.out.println("attacker: "+attacker+" | target: "+target);
-       /* int totalDamage = this.damage + weapon.getDamage();
-        totalDamage -= this.defense;
-        if(totalDamage < 0){
-            totalDamage = 0;
-        }
-        else {
-            target.hp -= totalDamage;
-            if(target.hp < 0){
-                target.Alive = false ;
-            }else {
-                target.Alive = true ;
-            }
-        }
-        System.out.println(this.name + " (" + this.type + ") attacks " + target.getName() + " with " + weapon.getName() + "!");
-        target.receiveDamage(totalDamage);*/
+    public void setAttack(Attack attack) {
+        this.attack = attack;
     }
-   public abstract void attack(Destructible target);
+
+    public Attack getAttack() {
+        return this.attack;
+    }
+
+    public void attack(Destructible target) {
+        attack.attack(this, target);
+    }
+
+    public boolean isAlive() {
+        return hp > 0;
+    }
+
+    public int getHealthPoints() {
+        return hp;
+    }
+
+    public void setAlive(boolean alive) {
+        isAlive = alive;
+    }
 
     public void receiveDamage(int amount) {
         int actualDamage = amount - defense;
@@ -152,11 +159,4 @@ public abstract class Character implements Destructible {
         return this.hp <= 0 ;
     }
 
-    public void setAttack(LifeStealDecorator lifeStealDecorator) {
-        lifeStealDecorator = (LifeStealDecorator) this.attack;
-    }
-
-    public Attack getAttack(Attack attack) {
-        return attack;
-    }
 }

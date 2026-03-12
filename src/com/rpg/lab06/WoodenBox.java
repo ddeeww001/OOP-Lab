@@ -16,7 +16,11 @@ public class WoodenBox implements Destructible {
     @Override
     public void takeDamage(int amount) {
         System.out.println(name + " takes " + amount + " damage!");
-        hp = Math.max(0, hp - amount);
+        this.hp = this.hp - amount;
+        if (this.hp <= 0) {
+            this.hp = 0;
+            System.out.println(name + " is now DESTROYED!");
+        }
         System.out.println(name + " HP: " + hp + "/" + maxHp + (hp == 0 ? " (DESTROYED!)" : ""));
     }
 

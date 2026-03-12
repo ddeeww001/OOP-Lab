@@ -8,6 +8,7 @@ public class Mage extends Character implements Destructible {
     public Mage(String name, int level, int maxHp, int damage, int defense, int mana, Weapon weapon) {
         super(name, level, maxHp, damage, defense, weapon, "Mage");
         this.mana = mana; this.maxMana = mana;
+        setAttack(new MageStyleDecorator(getAttack()));
     }
 
     @Override

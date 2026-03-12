@@ -8,12 +8,12 @@ public class WarriorStyleDecorator extends AttackDecorator {
     public void attack(Character attacker, Destructible target) {
         int originalDamage = attacker.getDamage();
         int enhancedDamage = (int) Math.round(originalDamage * 1.5);
-        String targetName = (target instanceof Character) ? ((Character)
-                target).getName() : "Target";
+        String targetName = (target instanceof Character) ? ((Character) target).getName() : "Target";
+
         attacker.setDamage(enhancedDamage);
+
         System.out.println("\n⚔️ " + attacker.getName() + " (Warrior) performs a POWERFUL STRIKE on " + targetName + "!");
-        System.out.println(" Base Damage: " + originalDamage + " -> Enhanced: "
-                + enhancedDamage + " (1.5x multiplier)");
+        System.out.println(" Base Damage: " + originalDamage + " -> Enhanced: " + enhancedDamage + " (1.5x multiplier)");
         try {
             wrappedAttack.attack(attacker, target);
         } finally {

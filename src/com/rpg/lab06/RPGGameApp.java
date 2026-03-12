@@ -55,8 +55,7 @@ public class RPGGameApp {
         battleTargets.add(treasureBox); // WoodenBox is Destructible (NOT aCharacter!)
         battleTargets.add(crate); // Another WoodenBox
         System.out.println("--- Aragorn and Mage attacks each other (Character - Destructible) ---");
-        warrior.setAttack(
-                new LifeStealDecorator(new DamageBoostDecorator(new CriticalStrikeDecorator(warrior.getAttack()), 8), 0.15));
+        warrior.setAttack(new LifeStealDecorator(new DamageBoostDecorator(new CriticalStrikeDecorator(warrior.getAttack()), 8), 0.15));
         System.out.println(" Decorator Chain Applied: WarriorStyle -> CriticalStrike -> DamageBoost -> LifeSteal");
         for (int i = 0; i < 5; i++) {
             warrior.attack(mage);

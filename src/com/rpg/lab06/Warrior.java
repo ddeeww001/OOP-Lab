@@ -6,11 +6,13 @@ public class Warrior extends Character {
     public Warrior(String name, int level, int maxHp, int damage, int defense, int armorValue, Weapon weapon) {
         super(name, level, maxHp, damage, defense, weapon, "Warrior");
         this.armorValue = armorValue;
+        setAttack(new WarriorStyleDecorator(getAttack()));
     }
 
     // 🌟 จุดสำคัญ: เปลี่ยนพารามิเตอร์เป็น Destructible target
     @Override
     public void attack(Destructible target) {
+        super.attack(target);
     }
 
     @Override

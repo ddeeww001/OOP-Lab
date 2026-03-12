@@ -11,8 +11,7 @@ public class BaseAttack implements Attack {
             return;
         }
 
-        int totalDamage = attacker.getDamage() +
-                attacker.getWeapon().getBaseDamage();
+        int totalDamage = attacker.getDamage() + attacker.getWeapon().getDamage();
         System.out.println("⚔️ Raw Attack Damage: " + totalDamage);
         target.takeDamage(totalDamage);
     }

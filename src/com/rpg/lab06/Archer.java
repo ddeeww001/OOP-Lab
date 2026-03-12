@@ -2,15 +2,21 @@ package com.rpg.lab06;
 
 public class Archer extends Character {
     private int accuracy;
+    private boolean rangeAdvantage;
 
     public Archer(String name, int level, int maxHp, int damage, int defense, int accuracy, Weapon weapon) {
         super(name, level, maxHp, damage, defense, weapon, "Archer");
         this.accuracy = accuracy;
+        this.rangeAdvantage = true;
+        setAttack(new ArcherStyleDecorator(getAttack()));
     }
+
+    public int getAccuracy() { return accuracy; }
+    public boolean hasRangeAdvantage() { return rangeAdvantage; }
 
 
     @Override
-    public void attack(Destructible target) {/*
+    public void attack(Destructible target) {
         int baseDmg = 40;
         int rangeBonus = 12;
         int totalDmg = baseDmg + rangeBonus;
@@ -20,7 +26,7 @@ public class Archer extends Character {
         System.out.println("Base Damage: " + baseDmg + " + Range Bonus: " + rangeBonus + " = " + totalDmg);
         System.out.println("Accuracy: " + accuracy + "% (HIT!)");
 
-        target.takeDamage(totalDmg);*/
+        target.takeDamage(totalDmg);
     }
 
     @Override
