@@ -1,4 +1,4 @@
-package com.rpg.lab05;
+package com.rpg.lab06;
 
 public class Mage extends Character implements Destructible {
     private int mana, maxMana;

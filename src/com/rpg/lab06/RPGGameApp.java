@@ -1,4 +1,4 @@
-package com.rpg.lab05;
+package com.rpg.lab06;
 
 import java.util.ArrayList;
 import java.util.List;

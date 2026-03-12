@@ -1,4 +1,4 @@
-package com.rpg.lab05;
+package com.rpg.lab06;
 
 public class StoneWall implements Destructible {
     private String location, type;

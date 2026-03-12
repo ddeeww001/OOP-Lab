@@ -1,4 +1,4 @@
-package com.rpg.lab05;
+package com.rpg.lab06;
 
 public abstract class Character implements Destructible {
     protected String name;
