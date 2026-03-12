@@ -10,7 +10,7 @@ public class Archer extends Character {
 
 
     @Override
-    public void attack(Destructible target) {
+    public void attack(Destructible target) {/*
         int baseDmg = 40;
         int rangeBonus = 12;
         int totalDmg = baseDmg + rangeBonus;
@@ -20,8 +20,9 @@ public class Archer extends Character {
         System.out.println("Base Damage: " + baseDmg + " + Range Bonus: " + rangeBonus + " = " + totalDmg);
         System.out.println("Accuracy: " + accuracy + "% (HIT!)");
 
-        target.takeDamage(totalDmg);
+        target.takeDamage(totalDmg);*/
     }
+
     @Override
     public void takeDamage(int amount) {
         int actualDamage = amount - defense;

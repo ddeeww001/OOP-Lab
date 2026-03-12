@@ -38,8 +38,9 @@ public abstract class Character implements Destructible {
 
     public String getName() { return name; }
 
-   /*public void attack(Character target) {
-        int totalDamage = this.damage + weapon.getDamage();
+   public void attack(Character attacker, Destructible target) {
+        System.out.println("attacker: "+attacker+" | target: "+target);
+       /* int totalDamage = this.damage + weapon.getDamage();
         totalDamage -= this.defense;
         if(totalDamage < 0){
             totalDamage = 0;
@@ -53,8 +54,8 @@ public abstract class Character implements Destructible {
             }
         }
         System.out.println(this.name + " (" + this.type + ") attacks " + target.getName() + " with " + weapon.getName() + "!");
-        target.receiveDamage(totalDamage);
-    }*/
+        target.receiveDamage(totalDamage);*/
+    }
    public abstract void attack(Destructible target);
 
     public void receiveDamage(int amount) {

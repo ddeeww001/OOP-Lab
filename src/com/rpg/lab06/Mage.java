@@ -3,6 +3,8 @@ package com.rpg.lab06;
 public class Mage extends Character implements Destructible {
     private int mana, maxMana;
 
+
+
     public Mage(String name, int level, int maxHp, int damage, int defense, int mana, Weapon weapon) {
         super(name, level, maxHp, damage, defense, weapon, "Mage");
         this.mana = mana; this.maxMana = mana;
@@ -41,6 +43,22 @@ public class Mage extends Character implements Destructible {
         super.displayCharacterDetails();
         System.out.println("Mana: " + mana + "/" + maxMana);
         System.out.println("Weapon: " + weapon.getName() + " (Type: " + weapon.getType() + ", Damage: " + weapon.getDamage() + ", Ability: " + weapon.getAbility() + ")");
+    }
+
+    public int getMana() {
+        return mana;
+    }
+
+    public void setMana(int mana) {
+        this.mana = mana;
+    }
+
+    public int getMaxMana() {
+        return maxMana;
+    }
+
+    public void setMaxMana(int maxMana) {
+        this.maxMana = maxMana;
     }
 
 }
