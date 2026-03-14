@@ -15,8 +15,7 @@ public class RPGGameApp {
         Weapon bowWeapon = new Weapon("Bow of Elven Make", "Ranged", 18, "Precise Shot");
 // ==================== CREATE CHARACTERS ====================
                 System.out.println("\n[STEP 2] Creating Characters...");
-        Warrior warrior = new Warrior("Aragorn", 12, 2000, 25, 8, 15,
-                swordWeapon);
+        Warrior warrior = new Warrior("Aragorn", 12, 2000, 25, 8, 15, swordWeapon);
         Mage mage = new Mage("Gandalf", 14, 1200, 20, 5, 150, staffWeapon);
         Archer archer = new Archer("Legolas", 13, 1400, 22, 6, 85, bowWeapon);
 // ==================== CREATE DESTRUCTIBLE OBJECTS (NON-CHARACTER)
@@ -141,7 +140,7 @@ public class RPGGameApp {
 // Demonstrate polymorphism with mixed destructibles
         System.out.println("\n" + "=".repeat(70));
         System.out.println(" [STEP 11] POLYMORPHIC LIST: Mixed Destructible Objects");
-                System.out.println("=".repeat(70));
+        System.out.println("=".repeat(70));
         System.out.println("\n✨ All objects in one list - Characters, Boxes, Walls, Gates!\n");
         List<Destructible> allDestructibles = new ArrayList<>();
         allDestructibles.add(eastWall); // StoneWall
@@ -150,8 +149,7 @@ public class RPGGameApp {
         System.out.println("--- Mage attacking various targets from polymorphic list ---");
         for (Destructible target : allDestructibles) {
             if (target instanceof StoneWall) {
-                System.out.println("\n>> Target: " + ((StoneWall)
-                        target).getLocation());
+                System.out.println("\n>> Target: " + ((StoneWall) target).getLocation());
             } else if (target instanceof WoodenBox) {
                 System.out.println("\n>> Target: " + ((WoodenBox) target).getName());
             } else if (target instanceof Character) {
