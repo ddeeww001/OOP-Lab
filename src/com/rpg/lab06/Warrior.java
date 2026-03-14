@@ -9,7 +9,7 @@ public class Warrior extends Character {
         setAttack(new WarriorStyleDecorator(getAttack()));
     }
 
-    // 🌟 จุดสำคัญ: เปลี่ยนพารามิเตอร์เป็น Destructible target
+
     @Override
     public void attack(Destructible target) {
         super.attack(target);
